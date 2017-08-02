@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Rentals Suits ]">
+  <test name="Rentals Test(failed)">
+    <classes>
+      <class name="Scenarios.LocalTrip">
+        <methods>
+          <include name="tearDown"/>
+          <include name="makeLocalTrip"/>
+        </methods>
+      </class> <!-- Scenarios.LocalTrip -->
+    </classes>
+  </test> <!-- Rentals Test(failed) -->
+</suite> <!-- Failed suite [Rentals Suits ] -->

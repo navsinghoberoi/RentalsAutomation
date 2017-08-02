@@ -1,0 +1,27 @@
+<suite name="Suite" parallel="none" thread-count="2">
+ 
+<test name="Test">
+ 
+<parameter name="Browser" value="Firefox" />
+ 
+<classes>
+ 
+<class name="Scenarios.LocalTrip"/>
+ 
+</classes>
+ 
+</test>
+ 
+<test name="Test1">
+ 
+<parameter name="Browser" value="Chrome" />
+ 
+<classes>
+ 
+<class name="Scenarios.LocalTrip"/>
+ 
+</classes>
+ 
+</test>
+ 
+</suite>
