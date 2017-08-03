@@ -1,0 +1,7 @@
+.classpath
+.settings
+JARS/
+Resources/
+Screenshots/
+test-output/
+bin/
