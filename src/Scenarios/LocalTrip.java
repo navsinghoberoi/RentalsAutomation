@@ -135,8 +135,8 @@ public class LocalTrip {
 
 		Contact_Details contactObj = new Contact_Details(driver);
 
-		String name = prop.getProperty("userName");
-		contactObj.enterName(name + System.currentTimeMillis());
+		String name = prop.getProperty("userName") + System.currentTimeMillis(); // To make unique name everytime
+		contactObj.enterName(name);
 		Thread.sleep(1000);
 		String number = prop.getProperty("userNumber");
 		contactObj.phoneNum(number);
@@ -161,6 +161,22 @@ public class LocalTrip {
 		System.out.println("Text after submitting request = " + submitText);
 		String expectedText = prop.getProperty("submittedText");
 		sa.assertEquals(submitText, expectedText);
+		
+		// Compare name from Rentals DB
+		
+		String RentalsDB_IP = prop.getProperty("QARENTALS_IP");
+		String RentalsDB_Username = prop.getProperty("QARENTALS_Username");
+		String RentalsDB_Pwd = prop.getProperty("QARENTALS_Password");
+		String RentalsDB_DBName = prop.getProperty("QARENTALS_DBname");
+		String RentalsDB_Query = prop.getProperty("QARENTALS_Query");
+		String RentalsDB_Column = prop.getProperty("QARENTALS_ColumnName");
+		
+		Thread.sleep(5000);
+		String dbValue = set.connectSQL(RentalsDB_IP, RentalsDB_Username, RentalsDB_Pwd, RentalsDB_DBName, RentalsDB_Query, RentalsDB_Column);
+		Thread.sleep(8000);
+		
+		sa.assertEquals(dbValue, name);
+		System.out.println("Assertion of name from DB is done");
 		
 		sa.assertAll();
 		

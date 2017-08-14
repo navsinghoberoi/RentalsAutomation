@@ -154,7 +154,7 @@ public class Setup_Class {
 	 
 	 // Method to connect with SQL
 	 
-		public void connectSQL(String ip, String username, String password, String dbName, String query, String columnName) throws Exception
+		public String connectSQL(String ip, String username, String password, String dbName, String query, String columnName) throws Exception
 		{
 			
 			Class.forName("com.mysql.jdbc.Driver");
@@ -166,15 +166,16 @@ public class Setup_Class {
 			Statement smt = con.createStatement();
 		
 			ResultSet res = smt.executeQuery(query);
-			
+			String value = "";
 			
 			while(res.next())
 			{
-				String value = res.getString(columnName);  // specify column name
+				value = res.getString(columnName);  // specify column name
 				System.out.println("Data fetched from database = "+value);
 					
 			}
 				
+			return value;
 			
 		}		
 		

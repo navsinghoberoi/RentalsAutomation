@@ -31,15 +31,15 @@ public class Homepage {
 		
 	}
 	
-	/*public void clickPriceButton()
-	{
-		driver.findElement(homepage).click();
-	}*/
-	
 	public void clickPriceButton()
 	{
-		setObj.click(homepage, 10);
+		driver.findElement(homepage).click();
 	}
+	
+/*	public void clickPriceButton()
+	{
+		setObj.click(homepage, 10);
+	}*/
 	
 	
 	
