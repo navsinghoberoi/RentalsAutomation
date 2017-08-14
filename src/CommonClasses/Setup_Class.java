@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -147,4 +151,33 @@ public class Setup_Class {
 			we.click();
 		}
 		
+	 
+	 // Method to connect with SQL
+	 
+		public void connectSQL(String ip, String username, String password, String dbName, String query, String columnName) throws Exception
+		{
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("Driver is loaded");
+			
+			Connection con = DriverManager.getConnection("jdbc:mysql://"+ip+"/"+dbName+"",username,password);
+			System.out.println("Connected to mysql database");
+			
+			Statement smt = con.createStatement();
+		
+			ResultSet res = smt.executeQuery(query);
+			
+			
+			while(res.next())
+			{
+				String value = res.getString(columnName);  // specify column name
+				System.out.println("Data fetched from database = "+value);
+					
+			}
+				
+			
+		}		
+		
+	 
+	 
 }
