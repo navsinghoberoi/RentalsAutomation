@@ -7,9 +7,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-public class ViewFare {
+public class ViewFare extends Basepage {
 
-	public WebDriver driver;
+public ViewFare(WebDriver driver) {
+		super(driver);
+		// TODO Auto-generated constructor stub
+	}
+
+
+//	public WebDriver driver;
 	
 	By seeRoute = By.xpath("(//*[text() = '+ See Route'])[2]");
 	By fareBreakup = By.xpath("//*[text() = '+ Fare Breakup']");
@@ -23,10 +29,10 @@ public class ViewFare {
 	By values = By.xpath("//*[@class = 'col s4']");
 	
 	
-	public ViewFare(WebDriver driver) {
-		this.driver = driver;
-	}
-	
+//	public ViewFare(WebDriver driver) {
+//		this.driver = driver;
+//	}
+//	
 	public void seeRoute()
 	{
 		boolean ab = driver.findElement(seeRoute).isDisplayed();

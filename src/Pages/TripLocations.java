@@ -6,17 +6,23 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class TripLocations {
+public class TripLocations extends Basepage {
 
-	public WebDriver driver;
+	//public WebDriver driver;
+
+	public TripLocations(WebDriver driver) {
+		super(driver);
+		// TODO Auto-generated constructor stub
+	}
+
 
 	By NewCity = By.xpath("//*[text() = '+ Add Next City']");
 	public By DestinationLoc = By.xpath("//*[@placeholder = 'Search for Destination Locations']");
 	By tourCities = By.xpath("//*[@class = 'city']");
 
-	public TripLocations(WebDriver driver) {
-		this.driver = driver;
-	}
+//	public TripLocations(WebDriver driver) {
+//		this.driver = driver;
+//	}
 
 	public void addNewCity() {
 		driver.findElement(NewCity).click();

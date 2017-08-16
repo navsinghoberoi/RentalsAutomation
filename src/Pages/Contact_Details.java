@@ -5,9 +5,15 @@ import org.openqa.selenium.WebDriver;
 
 import CommonClasses.Setup_Class;
 
-public class Contact_Details {
+public class Contact_Details extends Basepage {
 
-	public WebDriver driver;
+	public Contact_Details(WebDriver driver) {
+		super(driver);
+		// TODO Auto-generated constructor stub
+	}
+
+
+	//public WebDriver driver;
 	
 	Setup_Class setObj = new Setup_Class(driver);
 	
@@ -23,10 +29,10 @@ public class Contact_Details {
 	
 	
 	
-	public Contact_Details(WebDriver driver) {
-		this.driver = driver;
-	}
-	
+//	public Contact_Details(WebDriver driver) {
+//		this.driver = driver;
+//	}
+//	
 	public void enterName(String name1)
 	{
 		driver.findElement(name).sendKeys(name1);

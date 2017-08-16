@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import CommonClasses.Setup_Class;
+import Pages.Basepage;
 import Pages.Contact_Details;
 import Pages.Homepage;
 import Pages.Pickup;
@@ -18,18 +19,25 @@ import Pages.SourceCity;
 import Pages.TripLocations;
 import Pages.ViewFare;
 
-public class CrossCityTrip {
+public class CrossCityTrip extends Setup_Class{
 
-	public static WebDriver driver;
+	public CrossCityTrip(WebDriver driver) {
+		super(driver);
+		// TODO Auto-generated constructor stub
+	}
+
+	Setup_Class set = new Setup_Class(driver);
+	Basepage basepage = new Basepage(driver);
+	//public static WebDriver driver;
 
 	@Test
 	public void makeLocalTrip() throws Exception {
 
 		System.out.println("Scenario -- Make a cross city trip");
 
-		Setup_Class set = new Setup_Class(driver);
+		
 
-		driver = set.setup(); // Open browser
+		//driver = set.setup(); // Open browser
 
 		Properties prop = set.loadPropertyFile();
 
@@ -46,7 +54,8 @@ public class CrossCityTrip {
 		sourceObj.printSourceCities();
 
 		// Source City
-		String tab1 = set.getCurrentTab();
+		String tab1 = basepage.getCurrentTab();
+		//String tab1 = 
 		System.out.println("Name of the tab on Source City page = " + tab1);
 
 		String SourceCity = prop.getProperty("sourceCityCrossCity");
@@ -59,16 +68,16 @@ public class CrossCityTrip {
 		pickObj.enterPickupLocation(pickupLocation);
 		Thread.sleep(3000);
 
-		String tab2 = set.getCurrentTab();
+		String tab2 = basepage.getCurrentTab();
 		System.out.println("Name of the tab on Pickup Location page = " + tab2);
 
-		set.selectFromAutosuggestion(driver.findElement(pickObj.pickupLocation), Keys.ARROW_DOWN, Keys.ENTER);
+		basepage.selectFromAutosuggestion(driver.findElement(pickObj.pickupLocation), Keys.ARROW_DOWN, Keys.ENTER);
 		Thread.sleep(5000);
 
 		// Trip Locations
 		TripLocations tripObj = new TripLocations(driver);
 
-		String tab3 = set.getCurrentTab();
+		String tab3 = basepage.getCurrentTab();
 		System.out.println("Name of the tab on Trip Locations page = " + tab3);
 
 		int size = tripObj.sizeOfTourCities();
@@ -83,7 +92,7 @@ public class CrossCityTrip {
 		Thread.sleep(2000);
 		tripObj.enterDestinationLoc(newCity);
 		Thread.sleep(3000);
-		set.selectFromAutosuggestion(driver.findElement(tripObj.DestinationLoc), Keys.ARROW_DOWN, Keys.ENTER);
+		basepage.selectFromAutosuggestion(driver.findElement(tripObj.DestinationLoc), Keys.ARROW_DOWN, Keys.ENTER);
 		Thread.sleep(5000);
 	
 		int size1 = tripObj.sizeOfTourCities();
@@ -104,24 +113,24 @@ public class CrossCityTrip {
 		System.out.println("Is Add New City point displayed on Trip locations page ? " + NewCityButton);
 		sa.assertEquals(NewCityButton, true);
 
-		set.clickNextButton();
+		basepage.clickNextButton();
 		Thread.sleep(3000);
 
 		// Seating Capacity
 		SeatingCapacity seatObj = new SeatingCapacity(driver);
 
-		String tab4 = set.getCurrentTab();
+		String tab4 = basepage.getCurrentTab();
 		System.out.println("Name of the tab on Seating Capacity page = " + tab4);
 
 		String Seatcapacity = prop.getProperty("SeaterCrossCity");
 		seatObj.selectSeatingCapacity(Seatcapacity);
-		set.clickNextButton();
+		basepage.clickNextButton();
 
 		Thread.sleep(3000);
 
 		ViewFare fareObj = new ViewFare(driver);
 
-		String tab5 = set.getCurrentTab();
+		String tab5 = basepage.getCurrentTab();
 		System.out.println("Name of the tab on View Fare page = " + tab5);
 
 		String numOfDays = prop.getProperty("tripDaysCrossCity"); // Change number of Days from dropdown
@@ -197,7 +206,7 @@ public class CrossCityTrip {
 		String RentalsDB_Column = prop.getProperty("QARENTALS_ColumnName");
 		
 		Thread.sleep(5000);
-		String dbValue = set.connectSQL(RentalsDB_IP, RentalsDB_Username, RentalsDB_Pwd, RentalsDB_DBName, RentalsDB_Query, RentalsDB_Column);
+		String dbValue = basepage.connectSQL(RentalsDB_IP, RentalsDB_Username, RentalsDB_Pwd, RentalsDB_DBName, RentalsDB_Query, RentalsDB_Column);
 		Thread.sleep(8000);
 		
 		sa.assertEquals(dbValue, name);
@@ -213,7 +222,7 @@ public class CrossCityTrip {
 		
 		if (ITestResult.FAILURE == result.getStatus()) {
 			try {
-				Setup_Class.captureScreenShot(driver, "failScreenshot");
+				basepage.captureScreenShot(driver, "failScreenshot");
 				System.out.println("Screenshot taken");
 			} catch (Exception e) {
 				System.out.println("Exception while taking screenshot = " + e.getMessage());

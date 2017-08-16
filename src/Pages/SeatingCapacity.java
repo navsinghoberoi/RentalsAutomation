@@ -4,15 +4,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class SeatingCapacity {
+public class SeatingCapacity extends Basepage {
 
-	public WebDriver driver;
+public SeatingCapacity(WebDriver driver) {
+		super(driver);
+		// TODO Auto-generated constructor stub
+	}
+
+//	public WebDriver driver;
 
 	By seatingDropdown = By.xpath("//*[@class = 'dropdown-menu seating-dropdown']");
 
-	public SeatingCapacity(WebDriver driver) {
-		this.driver = driver;
-	}
+//	public SeatingCapacity(WebDriver driver) {
+//		this.driver = driver;
+//	}
 
 	public void selectSeatingCapacity(String capacity)
 

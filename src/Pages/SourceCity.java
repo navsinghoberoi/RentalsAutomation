@@ -6,15 +6,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class SourceCity {
+public class SourceCity extends Basepage {
 
-	public WebDriver driver;
+	public SourceCity(WebDriver driver) {
+		super(driver);
+		// TODO Auto-generated constructor stub
+	}
+
+	//public WebDriver driver;
 
 	By sourceCities = By.xpath("//*[@class = 'source-city-list-item']");
 
-	public SourceCity(WebDriver driver) {
-		this.driver = driver;
-	}
+//	public SourceCity(WebDriver driver) {
+//		this.driver = driver;
+//	}
 
 	public void printSourceCities() {
 		List<WebElement> cities = driver.findElements(sourceCities);

@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import CommonClasses.Setup_Class;
+import Pages.Basepage;
 import Pages.Contact_Details;
 import Pages.Homepage;
 import Pages.Pickup;
@@ -18,10 +19,20 @@ import Pages.SourceCity;
 import Pages.TripLocations;
 import Pages.ViewFare;
 
-public class LocalTrip {
+public class LocalTrip extends Setup_Class {
 
-	public static WebDriver driver;
+	//public static WebDriver driver;
 
+	public LocalTrip(WebDriver driver) {
+		super(driver);
+		// TODO Auto-generated constructor stub
+	}
+
+	Setup_Class set = new Setup_Class(driver);
+	Basepage basepage = new Basepage(driver);
+	
+	
+	
 	@Test
 	public void makeLocalTrip() throws Exception {
 
@@ -29,7 +40,7 @@ public class LocalTrip {
 
 		Setup_Class set = new Setup_Class(driver);
 
-		driver = set.setup(); // Open browser
+		//driver = set.setup(); // Open browser
 
 		Properties prop = set.loadPropertyFile();
 
@@ -63,7 +74,7 @@ public class LocalTrip {
 		/*String tab2 = set.getCurrentTab();
 		System.out.println("Name of the tab on Pickup Location page = " + tab2);*/
 
-		set.selectFromAutosuggestion(driver.findElement(pickObj.pickupLocation), Keys.ARROW_DOWN, Keys.ENTER);
+		basepage.selectFromAutosuggestion(driver.findElement(pickObj.pickupLocation), Keys.ARROW_DOWN, Keys.ENTER);
 		Thread.sleep(5000);
 
 		// Trip Locations
@@ -87,7 +98,7 @@ public class LocalTrip {
 		System.out.println("Is Add New City point displayed on Trip locations page ? " + NewCityButton);
 		sa.assertEquals(NewCityButton, true);
 
-		set.clickNextButton();
+		basepage.clickNextButton();
 		Thread.sleep(3000);
 
 		// Seating Capacity
@@ -98,7 +109,7 @@ public class LocalTrip {
 
 		String Seatcapacity = prop.getProperty("Seater");
 		seatObj.selectSeatingCapacity(Seatcapacity);
-		set.clickNextButton();
+		basepage.clickNextButton();
 
 		Thread.sleep(3000);
 
@@ -172,7 +183,7 @@ public class LocalTrip {
 		String RentalsDB_Column = prop.getProperty("QARENTALS_ColumnName");
 		
 		Thread.sleep(5000);
-		String dbValue = set.connectSQL(RentalsDB_IP, RentalsDB_Username, RentalsDB_Pwd, RentalsDB_DBName, RentalsDB_Query, RentalsDB_Column);
+		String dbValue = basepage.connectSQL(RentalsDB_IP, RentalsDB_Username, RentalsDB_Pwd, RentalsDB_DBName, RentalsDB_Query, RentalsDB_Column);
 		Thread.sleep(8000);
 		
 		sa.assertEquals(dbValue, name);
@@ -188,7 +199,7 @@ public class LocalTrip {
 		
 		if (ITestResult.FAILURE == result.getStatus()) {
 			try {
-				Setup_Class.captureScreenShot(driver, "failScreenshot");
+				basepage.captureScreenShot(driver, "failScreenshot");
 				System.out.println("Screenshot taken");
 			} catch (Exception e) {
 				System.out.println("Exception while taking screenshot = " + e.getMessage());

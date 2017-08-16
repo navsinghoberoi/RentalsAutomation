@@ -8,20 +8,25 @@ import org.openqa.selenium.WebElement;
 
 import CommonClasses.Setup_Class;
 
-public class Homepage {
+public class Homepage extends Basepage {
 
-	public WebDriver driver;
+	public Homepage(WebDriver driver) {
+		super(driver);
+		// TODO Auto-generated constructor stub
+	}
+
+	//public WebDriver driver;
 
 	Setup_Class setObj = new Setup_Class(driver);
 	
 	By homepage = By.xpath("//*[@href = '/sourceCity']");
 	
 	
-	public  Homepage(WebDriver driver)
-	{
-		this.driver = driver;
-	}
-	
+//	public  Homepage(WebDriver driver)
+//	{
+//		this.driver = driver;
+//	}
+//	
 	
 	public void getSizePriceButton()
 	{

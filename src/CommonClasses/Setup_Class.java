@@ -30,18 +30,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Setup_Class {
 
-	private static final long DEFAULT_FIND_ELEMENT_TIMEOUT = 30;
+	protected static final long DEFAULT_FIND_ELEMENT_TIMEOUT = 30;
 	 
 	public WebDriver driver;
 
-	By currentTab = By.xpath("//*[@class = 'current']");
-	By nextButton = By.xpath("//*[text() = 'Next']");
-	By headerText = By.xpath("//*[@class = 'title-card']");
+	protected By currentTab = By.xpath("//*[@class = 'current']");
+	protected By nextButton = By.xpath("//*[text() = 'Next']");
+	protected By headerText = By.xpath("//*[@class = 'title-card']");
 
 	public WebDriver setup() throws Exception {
 
-		System.setProperty("webdriver.chrome.driver","//Users//navpreetsingh//Downloads//Office Data//JARS//chromedriver");
-		
+		System.setProperty("webdriver.chrome.driver","//Users//nitish//Downloads//chromedriver");
+
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--disable-extensions");
 		driver = new ChromeDriver(options);
@@ -94,91 +94,5 @@ public class Setup_Class {
 		this.driver = driver;
 	}
 
-	public void getRentalsURL() {
-		driver.get("http://qarentals.shuttl.com/");
-	}
-
-	public String getCurrentTab() {
-		String tabName = driver.findElement(currentTab).getText();
-		return tabName;
-	}
-
-	public void clickNextButton() {
-			driver.findElement(nextButton).click();
-	}
-
-	public void printHeaderText() {
-		String Text = driver.findElement(headerText).getText();
-		System.out.println("Text on the header of page = " + Text);
-	}
-
-	
-	public void selectFromAutosuggestion(WebElement ele,Keys key, Keys key1)
-	{
-		WebElement act = ele;
-		act.sendKeys(key);
-		act.sendKeys(key1);
-		
-	}
-	
-	
-	
-	public static void captureScreenShot(WebDriver ldriver, String name) throws Exception{
-		         
-		 File src=((TakesScreenshot)ldriver).getScreenshotAs(OutputType.FILE);           
-		FileUtils.copyFile(src, new File("Screenshots//"+name+System.currentTimeMillis()+".png"));      
-		
-}	
-	
-
-	public void click(By locator, long... waitSeconds){
-			WebElement we = getElementWhenVisible(locator, waitSeconds);
-			we.click();
-		}
-	    
-	 public WebElement getElementWhenVisible(By locater, long... waitSeconds)
-		{
-			assert waitSeconds.length <= 1;
-			long seconds = waitSeconds.length > 0 ? waitSeconds[0] : DEFAULT_FIND_ELEMENT_TIMEOUT;
-
-			WebElement element = null;
-			WebDriverWait wait  = new WebDriverWait(driver, seconds);
-			element = wait.until(ExpectedConditions.visibilityOfElementLocated(locater));
-			return element;
-		}
-	
-	 public void click(WebElement we){
-			we.click();
-		}
-		
-	 
-	 // Method to connect with SQL
-	 
-		public String connectSQL(String ip, String username, String password, String dbName, String query, String columnName) throws Exception
-		{
-			
-			Class.forName("com.mysql.jdbc.Driver");
-			System.out.println("Driver is loaded");
-			
-			Connection con = DriverManager.getConnection("jdbc:mysql://"+ip+"/"+dbName+"",username,password);
-			System.out.println("Connected to mysql database");
-			
-			Statement smt = con.createStatement();
-		
-			ResultSet res = smt.executeQuery(query);
-			String value = "";
-			
-			while(res.next())
-			{
-				value = res.getString(columnName);  // specify column name
-				System.out.println("Data fetched from database = "+value);
-					
-			}
-				
-			return value;
-			
-		}		
-		
-	 
 	 
 }
