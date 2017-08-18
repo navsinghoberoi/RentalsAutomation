@@ -40,7 +40,7 @@ public class Setup_Class {
 
 	public WebDriver setup() throws Exception {
 
-		System.setProperty("webdriver.chrome.driver","//Users//navpreetsingh//Downloads//Office Data//JARS//chromedriver");
+		System.setProperty("webdriver.chrome.driver","Resources//chromedriver");
 		
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--disable-extensions");
